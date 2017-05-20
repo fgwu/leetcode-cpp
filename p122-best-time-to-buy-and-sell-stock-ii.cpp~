@@ -1,0 +1,30 @@
+class Solution {
+public:
+	/*20170519 23:19*/
+	/*         23:36*/
+	/*20170519 23:45 too many bugs, restart */
+	/*AC       00:33 simple bug: low should be p after a transaction */
+	int maxProfit(vector<int>& prices) {
+		int rv = 0, low = INT_MAX, high = INT_MIN;
+		if (!prices.size()) return rv;
+		prices.push_back(INT_MIN);
+
+		for(const auto & p: prices){
+			if (high == INT_MIN && low >= p) {
+				low = p;
+				continue;
+			}
+
+			if (high < p) {
+				high = p;
+				continue;
+			}
+
+			rv += high - low;
+			low = p;
+			high = INT_MIN;
+		}
+		return rv;
+	}
+
+};
