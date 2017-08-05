@@ -9,7 +9,6 @@
  */
 class Solution {
 public:
-	/*no queue, vector copy*/
 	vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
 		queue<TreeNode*> q;
 		vector<vector<int>> res;
