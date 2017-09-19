@@ -9,7 +9,7 @@
  */
 class Solution {
 public:
-	/*morris 20170919 0304*/
+	/*morris-like traveral 20170919 0304*/
 	vector<int> preorderTraversal(TreeNode* root) {
 		vector<int> res;
 		TreeNode* curr = root;
