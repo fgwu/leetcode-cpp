@@ -1,25 +1,50 @@
 class Solution {
 public:
-	/*FIFO iterative, BFS, like p017*/
-	/*20170803 1348*/
-	/*AC       1359*/
+	/*20170920 1206 second pass*/
 	vector<vector<int>> permute(vector<int>& nums) {
-		vector<vector<int>> res;
-		if (!nums.size()) return res;
-		res.push_back(vector<int>());
-		for (int n: nums) {
-			vector<vector<int>> tmpres;
-			for (auto& v: res) {
-				for (int i = 0; i <= v.size(); i++ ) {
-					tmpres.push_back(v);
-					tmpres.back().push_back(n);
-					swap(tmpres.back().back(), tmpres.back()[i]);
+		queue<vector<int>> q;
+		q.push(nums);
+		for (int i = 0; i < nums.size(); i++) {
+			int N = q.size();
+			for (int k = 0; k < N; k++) {
+				vector<int> tmp = q.front();
+				q.pop();
+				for (int j = i; j < nums.size(); j++) {
+					swap(tmp[i], tmp[j]);
+					q.push(tmp);
+					swap(tmp[i], tmp[j]);
 				}
 			}
-			swap(res, tmpres);
+		}
+		vector<vector<int>> res;
+		while(!q.empty()) {
+			res.push_back(q.front());
+			q.pop();
 		}
 		return res;
 	}
+
+
+	/*FIFO iterative, BFS, like p017*/
+	/*20170803 1348*/
+	/*AC       1359*/
+	// vector<vector<int>> permute(vector<int>& nums) {
+	//     vector<vector<int>> res;
+	//     if (!nums.size()) return res;
+	//     res.push_back(vector<int>());
+	//     for (int n: nums) {
+	//         vector<vector<int>> tmpres;
+	//         for (auto& v: res) {
+	//             for (int i = 0; i <= v.size(); i++ ) {
+	//                 tmpres.push_back(v);
+	//                 tmpres.back().push_back(n);
+	//                 swap(tmpres.back().back(), tmpres.back()[i]);
+	//             }
+	//         }
+	//         swap(res, tmpres);
+	//     }
+	//     return res;
+	// }
 
 
 	/* iterative backtracking */
